@@ -30,7 +30,7 @@ public abstract class HomeBaseApplication extends JApplication implements Action
   private static final Color INVIS = new Color(0 , 0, 0, 0);
 
   
-  private JButton aboutButton, sscButton;
+  private JButton aboutButton;
 //  private JTextField fileField;
   private String aboutText, sscText;
   
@@ -85,8 +85,39 @@ public abstract class HomeBaseApplication extends JApplication implements Action
   {
     String ac = evt.getActionCommand();
     
-    if (ac.equalsIgnoreCase(Descriptors.ABOUT)) handleAbout();
-    else if (ac.equalsIgnoreCase(Descriptors.SSC)) handleSsc();
+    switch (ac.toUpperCase())
+    {
+      case Descriptors.ABOUT:
+        handleAbout();
+        break;
+      case Descriptors.BOOK:
+        break;
+      case Descriptors.CARRIER:
+        break;
+      case Descriptors.DHALL:
+        break;
+      case Descriptors.DUKES:
+        break;
+      case Descriptors.FORBES:
+        break;
+      case Descriptors.GRAPT:
+        break;
+      case Descriptors.SSC:
+        handleSsc();
+        break;
+      case Descriptors.STADIUM:
+        break;
+      case Descriptors.QUAD:
+        break;
+      case Descriptors.UNION:
+        break;
+      case Descriptors.VILLAGE:
+        break;
+      default:
+        JOptionPane.showMessageDialog(getGUIComponent(), 
+          "There was a problem opening info pane",
+          "Error", JOptionPane.ERROR_MESSAGE);
+    }
   }
   
   /**
@@ -169,7 +200,70 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     aboutButton.addActionListener(this);
     contentPane.add(aboutButton);
     
-    sscButton = new JButton(Descriptors.SSC);
+    initializeMainButtons(contentPane);
+    
+    JComponent component = getGUIComponent();
+    component.setBounds(0, 60, WIDTH, HEIGHT-60);
+    contentPane.add(component);
+  }
+  
+  private void initializeMainButtons(final JPanel contentPane)
+  { 
+    JButton bookButton = new JButton(Descriptors.BOOK);
+    bookButton.setBounds(847, 726, 40, 40);
+    bookButton.setOpaque(false);
+    bookButton.setContentAreaFilled(false);
+    bookButton.setBorderPainted(false);
+    bookButton.setForeground(INVIS);
+    bookButton.addActionListener(this);
+    contentPane.add(bookButton);
+    
+    JButton carrButton = new JButton(Descriptors.CARRIER);
+    carrButton.setBounds(731, 493, 40, 40);
+    carrButton.setOpaque(false);
+    carrButton.setContentAreaFilled(false);
+    carrButton.setBorderPainted(false);
+    carrButton.setForeground(INVIS);
+    carrButton.addActionListener(this);
+    contentPane.add(carrButton);
+    
+    JButton dhallButton = new JButton(Descriptors.DHALL);
+    dhallButton.setBounds(710, 635, 40, 40);
+    dhallButton.setOpaque(false);
+    dhallButton.setContentAreaFilled(false);
+    dhallButton.setBorderPainted(false);
+    dhallButton.setForeground(INVIS);
+    dhallButton.addActionListener(this);
+    contentPane.add(dhallButton);
+    
+    JButton dukeButton = new JButton(Descriptors.DUKES);
+    dukeButton.setBounds(830, 500, 40, 40);
+    dukeButton.setOpaque(false);
+    dukeButton.setContentAreaFilled(false);
+    dukeButton.setBorderPainted(false);
+    dukeButton.setForeground(INVIS);    
+    dukeButton.addActionListener(this);
+    contentPane.add(dukeButton);
+    
+    JButton forbeButton = new JButton(Descriptors.FORBES);
+    forbeButton.setBounds(382, 301, 40, 40);
+    forbeButton.setOpaque(false);
+    forbeButton.setContentAreaFilled(false);
+    forbeButton.setBorderPainted(false);
+    forbeButton.setForeground(INVIS);
+    forbeButton.addActionListener(this);
+    contentPane.add(forbeButton);
+    
+    JButton graptButton = new JButton(Descriptors.GRAPT);
+    graptButton.setBounds(440, 90, 40, 40);
+    graptButton.setOpaque(false);
+    graptButton.setContentAreaFilled(false);
+    graptButton.setBorderPainted(false);
+    graptButton.setForeground(INVIS);
+    graptButton.addActionListener(this);
+    contentPane.add(graptButton);
+    
+    JButton sscButton = new JButton(Descriptors.SSC);
     sscButton.setBounds(790, 360, 40, 40);
     sscButton.setOpaque(false);
     sscButton.setContentAreaFilled(false);
@@ -178,8 +272,45 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     sscButton.addActionListener(this);
     contentPane.add(sscButton);
     
-    JComponent component = getGUIComponent();
-    component.setBounds(0, 60, WIDTH, HEIGHT-60);
-    contentPane.add(component);
+    JButton stadButton = new JButton(Descriptors.STADIUM);
+    stadButton.setBounds(711, 834, 40, 40);
+    stadButton.setOpaque(false);
+    stadButton.setContentAreaFilled(false);
+    stadButton.setBorderPainted(false);
+    stadButton.setForeground(INVIS);
+    stadButton.addActionListener(this);
+    contentPane.add(stadButton);
+    
+    JButton quadButton = new JButton(Descriptors.QUAD);
+    quadButton.setBounds(570, 490, 40, 40);
+    quadButton.setOpaque(false);
+    quadButton.setContentAreaFilled(false);
+    quadButton.setBorderPainted(false);
+    quadButton.setForeground(INVIS);
+    quadButton.addActionListener(this);
+    contentPane.add(quadButton);
+    
+    JButton unionButton = new JButton(Descriptors.UNION);
+    unionButton.setBounds(842, 565, 40, 40);
+    unionButton.setOpaque(false);
+    unionButton.setContentAreaFilled(false);
+    unionButton.setBorderPainted(false);
+    unionButton.setForeground(INVIS);
+    unionButton.addActionListener(this);
+    contentPane.add(unionButton);
+    
+    JButton villButton = new JButton(Descriptors.VILLAGE);
+    villButton.setBounds(1041, 778, 40, 40);
+    villButton.setOpaque(false);
+    villButton.setContentAreaFilled(false);
+    villButton.setBorderPainted(false);
+    villButton.setForeground(INVIS);
+    villButton.addActionListener(this);
+    contentPane.add(villButton);
+  }
+  
+  private void initializeEastButtons(final JPanel contentPane)
+  {
+    
   }
 }
