@@ -18,7 +18,7 @@ import resources.Descriptors;
  * The way in which the information is displayed is determined by the
  * getGUIComponent() method in the concrete specialization.
  * 
- * @author Prod. David Bernstein, James Madison University
+ * @author Reilly Vance & Chris Simmons
  * @version 1.0
  */
 public abstract class HomeBaseApplication extends JApplication implements ActionListener
@@ -72,6 +72,8 @@ public abstract class HomeBaseApplication extends JApplication implements Action
         fetchDescription(Descriptors.ABOUT);
         handleWindow(desc, Descriptors.ABOUT);
         break;
+        
+      // main campus
       case Descriptors.BOOK:
         fetchDescription(Descriptors.BOOK);
         handleWindow(desc, Descriptors.BOOK);
@@ -116,26 +118,27 @@ public abstract class HomeBaseApplication extends JApplication implements Action
         fetchDescription(Descriptors.VILLAGE);
         handleWindow(desc, Descriptors.VILLAGE);
         break;
-      // TODO: add east campus
+        
+      // east campus
       case Descriptors.CENTER:
         fetchDescription(Descriptors.CENTER);
         handleWindow(desc, Descriptors.CENTER);
+        break;
+      case Descriptors.EASTDORMS:
+        fetchDescription(Descriptors.EASTDORMS);
+        handleWindow(desc, Descriptors.EASTDORMS);
         break;
       case Descriptors.EHALL:
         fetchDescription(Descriptors.EHALL);
         handleWindow(desc, Descriptors.EHALL);
         break;
-      case Descriptors.FDORMS:
-        fetchDescription(Descriptors.FDORMS);
-        handleWindow(desc, Descriptors.FDORMS);
+      case Descriptors.ENGEO:
+        fetchDescription(Descriptors.ENGEO);
+        handleWindow(desc, Descriptors.ENGEO);
         break;
       case Descriptors.FESTI:
         fetchDescription(Descriptors.FESTI);
         handleWindow(desc, Descriptors.FESTI);
-        break;
-      case Descriptors.KING:
-        fetchDescription(Descriptors.KING);
-        handleWindow(desc, Descriptors.KING);
         break;
       case Descriptors.ROSE:
         fetchDescription(Descriptors.ROSE);
@@ -340,6 +343,15 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     centerButton.addActionListener(this);
     contentPane.add(centerButton);
     
+    JButton fdormsButton = new JButton(Descriptors.EASTDORMS);
+    fdormsButton.setBounds(855, 430, 40, 40);
+    fdormsButton.setOpaque(false);
+    fdormsButton.setContentAreaFilled(false);
+    fdormsButton.setBorderPainted(false);
+    fdormsButton.setForeground(INVIS);
+    fdormsButton.addActionListener(this);
+    contentPane.add(fdormsButton);
+    
     JButton ehallButton = new JButton(Descriptors.EHALL);
     ehallButton.setBounds(900, 490, 40, 40);
     ehallButton.setOpaque(false);
@@ -349,14 +361,14 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     ehallButton.addActionListener(this);
     contentPane.add(ehallButton);
     
-    JButton fdormsButton = new JButton(Descriptors.FDORMS);
-    fdormsButton.setBounds(855, 430, 40, 40);
-    fdormsButton.setOpaque(false);
-    fdormsButton.setContentAreaFilled(false);
-    fdormsButton.setBorderPainted(false);
-    fdormsButton.setForeground(INVIS);
-    fdormsButton.addActionListener(this);
-    contentPane.add(fdormsButton);
+    JButton kingButton = new JButton(Descriptors.ENGEO);
+    kingButton.setBounds(775, 125, 40, 40);
+    kingButton.setOpaque(false);
+    kingButton.setContentAreaFilled(false);
+    kingButton.setBorderPainted(false);
+    kingButton.setForeground(INVIS);
+    kingButton.addActionListener(this);
+    contentPane.add(kingButton);
     
     JButton festiButton = new JButton(Descriptors.FESTI);
     festiButton.setBounds(1017, 275, 40, 40);
@@ -366,15 +378,6 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     festiButton.setForeground(INVIS);
     festiButton.addActionListener(this);
     contentPane.add(festiButton);
-    
-    JButton kingButton = new JButton(Descriptors.KING);
-    kingButton.setBounds(775, 125, 40, 40);
-    kingButton.setOpaque(false);
-    kingButton.setContentAreaFilled(false);
-    kingButton.setBorderPainted(false);
-    kingButton.setForeground(INVIS);
-    kingButton.addActionListener(this);
-    contentPane.add(kingButton);
     
     JButton roseButton = new JButton(Descriptors.ROSE);
     roseButton.setBounds(1167, 135, 40, 40);

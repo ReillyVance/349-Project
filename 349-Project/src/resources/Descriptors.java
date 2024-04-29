@@ -3,10 +3,11 @@ package resources;
 /**
  * Class of various descriptor tags meant to be used
  * with buttons.
+ * 
+ * @author Reilly Vance & Chris Simmons
  */
 public class Descriptors
 {
-  public static final String MAIN = "MAIN CAMPUS";
   public static final String EAST = "EAST CAMPUS";
   public static final String ABOUT = "ABOUT";
   
@@ -25,10 +26,10 @@ public class Descriptors
   
   // east campus
   public static final String CENTER = "CENTER";
+  public static final String EASTDORMS = "EASTDORMS";
   public static final String EHALL = "EHALL";
-  public static final String FDORMS = "FDORMS";
+  public static final String ENGEO = "ENGEO";
   public static final String FESTI = "FESTI";
-  public static final String KING = "KING";
   public static final String ROSE = "ROSE";
   public static final String UREC = "UREC";
 }

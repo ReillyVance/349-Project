@@ -1,5 +1,7 @@
 Click on the stars for information
 and personal anecdotes about locations on campus!
 
+To view East Campus, click the button in the top left!
+
 Project made by Reilly Vance and Christopher Simmons.
 Map Credit: map.jmu.edu

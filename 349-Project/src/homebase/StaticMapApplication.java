@@ -14,9 +14,9 @@ import gui.*;
 import resources.Descriptors;
 
 /**
-* An application that displays Property information on a static map.
+* An application that displays campus information on a static map.
 * 
-* @author Prof. David Bernstein, James Madison University
+* @author Reilly Vance & Chris Simmons
 * @version 1.0
 */
 public class StaticMapApplication extends HomeBaseApplication
