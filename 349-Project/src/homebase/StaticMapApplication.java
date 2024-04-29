@@ -1,5 +1,7 @@
 package homebase;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 //Java libraries
 import java.io.*;
 import javax.swing.*;
@@ -9,6 +11,7 @@ import app.*;
 
 //Application libraries
 import gui.*;
+import resources.Descriptors;
 
 /**
 * An application that displays Property information on a static map.
@@ -18,6 +21,8 @@ import gui.*;
 */
 public class StaticMapApplication extends HomeBaseApplication
 {
+  private static final String MAIN_CAMPUS = "campus-map.png";
+  private static final String EAST_CAMPUS = "east-map.png";
   private StaticCampusMap campusMap;
   
   /**
@@ -28,16 +33,8 @@ public class StaticMapApplication extends HomeBaseApplication
   public StaticMapApplication(final String[] args) throws IOException
   {
     super(args);
-    
-//    String grayWatermark, useWatermark;
-//    if (args.length < 1) useWatermark = null;
-//    else useWatermark = args[0];
-//    
-//    if (args.length < 2) grayWatermark = null;
-//    else grayWatermark = args[1];
-    
-//    propertyMap = new StaticPropertyMap(useWatermark, grayWatermark, WIDTH, HEIGHT-60);
-    campusMap = new StaticCampusMap(WIDTH, HEIGHT);
+
+    campusMap = new StaticCampusMap(WIDTH, HEIGHT, MAIN_CAMPUS);
   }
     
   /**
@@ -52,15 +49,31 @@ public class StaticMapApplication extends HomeBaseApplication
   }
   
   /**
-   * Get the PropertyObserver to inform of changes.
-   * 
-   * @return The PropertyObserver
+   * Create new window to hold the East Campus Map.
+   * @throws IOException if something goes wrong
    */
-//  @Override
-//  protected PropertyObserver getPropertyObserver()
-//  {
-//    return propertyMap;
-//  }
+  @Override
+  protected void handleEast() throws IOException
+  {
+    StaticCampusMap eastMap = new StaticCampusMap(1495, 815, EAST_CAMPUS);
+    JFrame frame = new JFrame(Descriptors.EAST);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    frame.setMinimumSize(new Dimension(1495, 815));
+    JPanel panel = new JPanel();
+    panel.setLayout(null);
+    panel.setOpaque(true);
+    
+    initializeEastButtons(panel);
+    
+    JComponent component = eastMap.getView();
+    panel.add(component);
+    
+    frame.getContentPane().add(BorderLayout.CENTER, panel);
+    frame.pack();
+    frame.setLocationByPlatform(true);
+    frame.setVisible(true);
+    frame.setResizable(false);
+  }
   
   /**
    * Construct and invoke  (in the event dispatch thread) 

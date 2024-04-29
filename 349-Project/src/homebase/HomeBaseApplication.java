@@ -1,7 +1,6 @@
 package homebase;
 
 import java.awt.Color;
-import java.awt.Font;
 //Java libraries
 import java.awt.event.*;
 import java.io.*;
@@ -27,12 +26,11 @@ public abstract class HomeBaseApplication extends JApplication implements Action
   public static final int WIDTH  = 1524;
   public static final int HEIGHT = 968;
   
-  private static final Color INVIS = new Color(0 , 0, 0, 0);
+  private static final Color INVIS = new Color(0, 0, 0, 0);
 
   
   private JButton aboutButton;
-//  private JTextField fileField;
-  private String aboutText, sscText;
+  private String desc;
   
   /**
    * Explicit value constructor.
@@ -42,34 +40,6 @@ public abstract class HomeBaseApplication extends JApplication implements Action
   public HomeBaseApplication(final String[] args)
   {
     super(args, WIDTH, HEIGHT);
-    
-    // TODO: MAKE READING FROM FILES BETTER
-    ResourceFinder rf = ResourceFinder.createInstance(new Marker());
-    InputStream    is = rf.findInputStream("about.txt");
-    BufferedReader in = new BufferedReader(new InputStreamReader(is));
-    
-    String line;
-    aboutText = "";
-    sscText = "";
-    try
-    {
-      while ((line = in.readLine()) != null)
-      {
-        aboutText += line + "\n";
-      }
-      is = rf.findInputStream("ssc.txt");
-      in = new BufferedReader(new InputStreamReader(is));
-      line = "";
-      while ((line = in.readLine()) != null)
-      {
-        sscText += line + "\n";
-      }
-    }
-    catch (IOException ioe)
-    {
-      aboutText = "CS349 Project";
-      sscText = "SSC info";
-    }
   }
 
   
@@ -87,80 +57,140 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     
     switch (ac.toUpperCase())
     {
+      case Descriptors.EAST:
+        try
+        {
+          handleEast();
+        }
+        catch (IOException e)
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+        break;
       case Descriptors.ABOUT:
-        handleAbout();
+        fetchDescription(Descriptors.ABOUT);
+        handleWindow(desc, Descriptors.ABOUT);
         break;
       case Descriptors.BOOK:
+        fetchDescription(Descriptors.BOOK);
+        handleWindow(desc, Descriptors.BOOK);
         break;
       case Descriptors.CARRIER:
+        fetchDescription(Descriptors.CARRIER);
+        handleWindow(desc, Descriptors.CARRIER);
         break;
       case Descriptors.DHALL:
+        fetchDescription(Descriptors.DHALL);
+        handleWindow(desc, Descriptors.DHALL);
         break;
       case Descriptors.DUKES:
+        fetchDescription(Descriptors.DUKES);
+        handleWindow(desc, Descriptors.DUKES);
         break;
       case Descriptors.FORBES:
+        fetchDescription(Descriptors.FORBES);
+        handleWindow(desc, Descriptors.FORBES);
         break;
       case Descriptors.GRAPT:
-        break;
-      case Descriptors.SSC:
-        handleSsc();
-        break;
-      case Descriptors.STADIUM:
+        fetchDescription(Descriptors.GRAPT);
+        handleWindow(desc, Descriptors.GRAPT);
         break;
       case Descriptors.QUAD:
+        fetchDescription(Descriptors.QUAD);
+        handleWindow(desc, Descriptors.QUAD);
+        break;
+      case Descriptors.SSC:
+        fetchDescription(Descriptors.SSC);
+        handleWindow(desc, Descriptors.SSC);
+        break;
+      case Descriptors.STADIUM:
+        fetchDescription(Descriptors.STADIUM);
+        handleWindow(desc, Descriptors.STADIUM);
         break;
       case Descriptors.UNION:
+        fetchDescription(Descriptors.UNION);
+        handleWindow(desc, Descriptors.UNION);
         break;
       case Descriptors.VILLAGE:
+        fetchDescription(Descriptors.VILLAGE);
+        handleWindow(desc, Descriptors.VILLAGE);
+        break;
+      // TODO: add east campus
+      case Descriptors.CENTER:
+        fetchDescription(Descriptors.CENTER);
+        handleWindow(desc, Descriptors.CENTER);
+        break;
+      case Descriptors.EHALL:
+        fetchDescription(Descriptors.EHALL);
+        handleWindow(desc, Descriptors.EHALL);
+        break;
+      case Descriptors.FDORMS:
+        fetchDescription(Descriptors.FDORMS);
+        handleWindow(desc, Descriptors.FDORMS);
+        break;
+      case Descriptors.FESTI:
+        fetchDescription(Descriptors.FESTI);
+        handleWindow(desc, Descriptors.FESTI);
+        break;
+      case Descriptors.KING:
+        fetchDescription(Descriptors.KING);
+        handleWindow(desc, Descriptors.KING);
+        break;
+      case Descriptors.ROSE:
+        fetchDescription(Descriptors.ROSE);
+        handleWindow(desc, Descriptors.ROSE);
+        break;
+      case Descriptors.UREC:
+        fetchDescription(Descriptors.UREC);
+        handleWindow(desc, Descriptors.UREC);
         break;
       default:
         JOptionPane.showMessageDialog(getGUIComponent(), 
-          "There was a problem opening info pane",
-          "Error", JOptionPane.ERROR_MESSAGE);
+            "There was a problem opening info pane",
+            ac, JOptionPane.ERROR_MESSAGE);
     }
   }
   
+  protected abstract void handleEast() throws IOException;
+  
   /**
-   * Handle the ABOUT button.
+   * Get description info based off tag.
+   * @param descriptor tag
+   * @return description of location
    */
-  protected void handleAbout()
+  private String fetchDescription(final String descriptor)
   {
-    JOptionPane.showMessageDialog(getGUIComponent(), 
-        aboutText, Descriptors.ABOUT, JOptionPane.INFORMATION_MESSAGE);
+    ResourceFinder rf = ResourceFinder.createInstance(new Marker());
+    InputStream    is = rf.findInputStream(descriptor + ".txt");
+    BufferedReader in = new BufferedReader(new InputStreamReader(is));
+    
+    String line;
+    desc = "";
+    try
+    {
+      while ((line = in.readLine()) != null)
+      {
+        desc += line + "\n";
+      }
+    }
+    catch (IOException ioe)
+    {
+      desc = descriptor;
+    }
+    return desc;
   }
   
   /**
-   * Handle the SSC button.
+   * Handle the description buttons.
+   * @param description location description
+   * @param descriptor location descriptor tag
    */
-  protected void handleSsc()
+  protected void handleWindow(final String description, final String descriptor)
   {
-    JOptionPane.showMessageDialog(getGUIComponent(), sscText, 
-        Descriptors.SSC, JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(getGUIComponent(), 
+        description, descriptor, JOptionPane.INFORMATION_MESSAGE);
   }
-  /**
-   * Handle the LOAD button.
-   */
-//  protected void handleLoad()
-//  {
-//    String fileName = fileField.getText();
-//    PropertyReader in;
-//    try
-//    {
-//      BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
-//      if (fileName.endsWith("apartments")) in = new ApartmentReader(br);
-//      else in = new HouseReader(br);
-//
-//      getPropertyObserver().reset();
-//      in.addObserver(getPropertyObserver());
-//      in.readAll();
-//    }
-//    catch (IOException ioe)
-//    {
-//      JOptionPane.showMessageDialog(getGUIComponent(), 
-//          "There was a problem reading " + fileName,
-//          "Error", JOptionPane.ERROR_MESSAGE);
-//    }
-//  }
   
   /**
    * Construct the GUI components to use to display the Property information.
@@ -168,13 +198,6 @@ public abstract class HomeBaseApplication extends JApplication implements Action
    * @return The JComponent
    */
   protected abstract JComponent getGUIComponent();
-  
-  /**
-   * Get the PropertyObserver to inform of changes.
-   * 
-   * @return The PropertyObserver
-   */
-//  protected abstract PropertyObserver getPropertyObserver();
   
   /**
    * Initialize this JApplication (required by JApplication).
@@ -187,13 +210,10 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     JPanel contentPane = (JPanel)getContentPane();
     contentPane.setLayout(null);
 
-//    JLabel label = new JLabel("File: ");
-//    label.setBounds(30, 30, 40, 30);
-//    contentPane.add(label);
-    
-//    fileField = new JTextField();
-//    fileField.setBounds(80, 30, 200, 30);
-//    contentPane.add(fileField);
+    JButton eastButton = new JButton(Descriptors.EAST);
+    eastButton.setBounds(20, 20, 110, 30);
+    eastButton.addActionListener(this);
+    contentPane.add(eastButton);
     
     aboutButton = new JButton(Descriptors.ABOUT);
     aboutButton.setBounds(WIDTH - 90, 20, 70, 30);
@@ -207,7 +227,7 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     contentPane.add(component);
   }
   
-  private void initializeMainButtons(final JPanel contentPane)
+  protected void initializeMainButtons(final JPanel contentPane)
   { 
     JButton bookButton = new JButton(Descriptors.BOOK);
     bookButton.setBounds(847, 726, 40, 40);
@@ -309,8 +329,69 @@ public abstract class HomeBaseApplication extends JApplication implements Action
     contentPane.add(villButton);
   }
   
-  private void initializeEastButtons(final JPanel contentPane)
+  protected void initializeEastButtons(final JPanel contentPane)
   {
+    JButton centerButton = new JButton(Descriptors.CENTER);
+    centerButton.setBounds(1040, 530, 40, 40);
+    centerButton.setOpaque(false);
+    centerButton.setContentAreaFilled(false);
+    centerButton.setBorderPainted(false);
+    centerButton.setForeground(INVIS);
+    centerButton.addActionListener(this);
+    contentPane.add(centerButton);
     
+    JButton ehallButton = new JButton(Descriptors.EHALL);
+    ehallButton.setBounds(900, 490, 40, 40);
+    ehallButton.setOpaque(false);
+    ehallButton.setContentAreaFilled(false);
+    ehallButton.setBorderPainted(false);
+    ehallButton.setForeground(INVIS);
+    ehallButton.addActionListener(this);
+    contentPane.add(ehallButton);
+    
+    JButton fdormsButton = new JButton(Descriptors.FDORMS);
+    fdormsButton.setBounds(855, 430, 40, 40);
+    fdormsButton.setOpaque(false);
+    fdormsButton.setContentAreaFilled(false);
+    fdormsButton.setBorderPainted(false);
+    fdormsButton.setForeground(INVIS);
+    fdormsButton.addActionListener(this);
+    contentPane.add(fdormsButton);
+    
+    JButton festiButton = new JButton(Descriptors.FESTI);
+    festiButton.setBounds(1017, 275, 40, 40);
+    festiButton.setOpaque(false);
+    festiButton.setContentAreaFilled(false);
+    festiButton.setBorderPainted(false);
+    festiButton.setForeground(INVIS);
+    festiButton.addActionListener(this);
+    contentPane.add(festiButton);
+    
+    JButton kingButton = new JButton(Descriptors.KING);
+    kingButton.setBounds(775, 125, 40, 40);
+    kingButton.setOpaque(false);
+    kingButton.setContentAreaFilled(false);
+    kingButton.setBorderPainted(false);
+    kingButton.setForeground(INVIS);
+    kingButton.addActionListener(this);
+    contentPane.add(kingButton);
+    
+    JButton roseButton = new JButton(Descriptors.ROSE);
+    roseButton.setBounds(1167, 135, 40, 40);
+    roseButton.setOpaque(false);
+    roseButton.setContentAreaFilled(false);
+    roseButton.setBorderPainted(false);
+    roseButton.setForeground(INVIS);
+    roseButton.addActionListener(this);
+    contentPane.add(roseButton);
+    
+    JButton urecButton = new JButton(Descriptors.UREC);
+    urecButton.setBounds(347, 215, 40, 40);
+    urecButton.setOpaque(false);
+    urecButton.setContentAreaFilled(false);
+    urecButton.setBorderPainted(false);
+    urecButton.setForeground(INVIS);
+    urecButton.addActionListener(this);
+    contentPane.add(urecButton);
   }
 }

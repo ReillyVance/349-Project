@@ -1,12 +1,8 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Map;
-
-import campus.visual.StyleIconReader;
 import io.ResourceFinder;
 import visual.Visualization;
 import visual.VisualizationView;
@@ -14,6 +10,9 @@ import visual.statik.sampled.ContentFactory;
 import visual.statik.sampled.ImageFactory;
 import resources.Marker;
 
+/**
+ * GUI component for the Campus Map.
+ */
 public class StaticCampusMap extends Visualization
 {
   private static final Color BACKGROUND_COLOR = new Color(204, 204, 255);
@@ -25,14 +24,15 @@ public class StaticCampusMap extends Visualization
    * Explicit Value Constructor.
    * @param width width of the component
    * @param height height of the component
+   * @param mapImage image map name
    * @throws IOException if something goes wrong
    */
-  public StaticCampusMap(final int width, final int height) throws IOException
+  public StaticCampusMap(final int width, 
+      final int height, final String mapImage) throws IOException
   {
     super();
     
     jarFinder = ResourceFinder.createInstance(new Marker());
-    StyleIconReader iconReader = new StyleIconReader(jarFinder);
     
     VisualizationView view = getView();
     view.setBounds(0, 0, width, height);
@@ -41,7 +41,7 @@ public class StaticCampusMap extends Visualization
     
     ContentFactory contentFactory = new ContentFactory(jarFinder);
     ImageFactory imageFactory = new ImageFactory(jarFinder);
-    BufferedImage image = imageFactory.createBufferedImage("campus-map.png");
+    BufferedImage image = imageFactory.createBufferedImage(mapImage);
     map = contentFactory.createContent(image, false);
     add(map);
   }
